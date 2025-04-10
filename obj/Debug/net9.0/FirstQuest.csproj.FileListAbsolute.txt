@@ -1,0 +1,14 @@
+D:\Dan.bytedev\firstQuest\FirstQuest\bin\Debug\net9.0\FirstQuest.exe
+D:\Dan.bytedev\firstQuest\FirstQuest\bin\Debug\net9.0\FirstQuest.deps.json
+D:\Dan.bytedev\firstQuest\FirstQuest\bin\Debug\net9.0\FirstQuest.runtimeconfig.json
+D:\Dan.bytedev\firstQuest\FirstQuest\bin\Debug\net9.0\FirstQuest.dll
+D:\Dan.bytedev\firstQuest\FirstQuest\bin\Debug\net9.0\FirstQuest.pdb
+D:\Dan.bytedev\firstQuest\FirstQuest\obj\Debug\net9.0\FirstQuest.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dan.bytedev\firstQuest\FirstQuest\obj\Debug\net9.0\FirstQuest.AssemblyInfoInputs.cache
+D:\Dan.bytedev\firstQuest\FirstQuest\obj\Debug\net9.0\FirstQuest.AssemblyInfo.cs
+D:\Dan.bytedev\firstQuest\FirstQuest\obj\Debug\net9.0\FirstQuest.csproj.CoreCompileInputs.cache
+D:\Dan.bytedev\firstQuest\FirstQuest\obj\Debug\net9.0\FirstQuest.dll
+D:\Dan.bytedev\firstQuest\FirstQuest\obj\Debug\net9.0\refint\FirstQuest.dll
+D:\Dan.bytedev\firstQuest\FirstQuest\obj\Debug\net9.0\FirstQuest.pdb
+D:\Dan.bytedev\firstQuest\FirstQuest\obj\Debug\net9.0\FirstQuest.genruntimeconfig.cache
+D:\Dan.bytedev\firstQuest\FirstQuest\obj\Debug\net9.0\ref\FirstQuest.dll
