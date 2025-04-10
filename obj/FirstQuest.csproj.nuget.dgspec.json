@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dan.bytedev\\firstQuest\\FirstQuest\\FirstQuest.csproj": {}
+    "D:\\Dan.bytedev\\firstQuest\\FirstQuest.csproj": {}
   },
   "projects": {
-    "D:\\Dan.bytedev\\firstQuest\\FirstQuest\\FirstQuest.csproj": {
+    "D:\\Dan.bytedev\\firstQuest\\FirstQuest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dan.bytedev\\firstQuest\\FirstQuest\\FirstQuest.csproj",
+        "projectUniqueName": "D:\\Dan.bytedev\\firstQuest\\FirstQuest.csproj",
         "projectName": "FirstQuest",
-        "projectPath": "D:\\Dan.bytedev\\firstQuest\\FirstQuest\\FirstQuest.csproj",
+        "projectPath": "D:\\Dan.bytedev\\firstQuest\\FirstQuest.csproj",
         "packagesPath": "C:\\Users\\brend\\.nuget\\packages\\",
-        "outputPath": "D:\\Dan.bytedev\\firstQuest\\FirstQuest\\obj\\",
+        "outputPath": "D:\\Dan.bytedev\\firstQuest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\brend\\AppData\\Roaming\\NuGet\\NuGet.Config"
