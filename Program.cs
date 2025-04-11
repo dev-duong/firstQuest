@@ -73,7 +73,7 @@ namespace FirstQuest
             {
                 bool inCombat = true; // Set combat flag to true
                 Console.WriteLine("\nYou encountered a monster!");
-                Monster monster = new Monster("Goblin", 50, 10); // Create a new monster
+                Monster monster = new Monster("Goblin", 50, rnd.Next(5, 16)); // Create a new monster
 
                 attackMonster(monster, myPlayer, inCombat, gameRunning); // Attack the monster
             }
@@ -100,8 +100,21 @@ namespace FirstQuest
         {
             while (inCombat == true)
             {
-                Console.WriteLine($"\nYou attack the {monster.Name}!");
-                monster.Health -= rnd.Next(5, 21); // Player attacks monster for 20 damage
+                int attackRoll = rollDice(); // Roll the dice to determine the attack outcome
+                if (attackRoll <= 3)
+                {
+                    Console.WriteLine("\nYou missed your attack!");
+                }
+                else if (attackRoll <= 5)
+                {
+                    Console.WriteLine("\nYou hit the monster for 10 damage!");
+                    monster.Health -= 10; // Player attacks monster for 10 damage
+                }
+                else
+                {
+                    Console.WriteLine("\nCritical hit! You hit the monster for 20 damage!");
+                    monster.Health -= 20; // Player attacks monster for 20 damage
+                }
 
                 if (monster.Health <= 0)
                 {
