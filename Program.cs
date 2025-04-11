@@ -15,6 +15,7 @@ namespace FirstQuest
 
             myPlayer.Name = playerName;
             myPlayer.Health = 100;
+            myPlayer.Gold = 0; // Initialize gold to 0
 
             myPlayer.DisplayPlayerInfo();
 
@@ -56,49 +57,22 @@ namespace FirstQuest
             // Roll the dice to determine the encounter
             int encounterRoll = rollDice();
 
-            if (encounterRoll > 2)
+            if (encounterRoll <= 2)
             {
                 Console.WriteLine("\nYou encountered a monster!");
-                fightMonster(myPlayer);
             }
-            if (encounterRoll == 3)
+
+            else if (encounterRoll <= 4)
             {
-                Console.WriteLine("\nYou found a health potion! Heal 10 health.");
-                if (myPlayer.Health + 10 > 100)
-                {
-                    myPlayer.Health = 100; // Cap health at 100
-                }
-                else
-                {
-                    myPlayer.Health += 10;
-                }
+                Console.WriteLine("\nYou found a treasure chest!");
+                int treasure = rnd.Next(10, 51); // Random treasure between 10 and 50 gold
+                myPlayer.Gold += treasure; // Add treasure to player's gold
             }
             else
             {
-                Console.WriteLine("\nYou fell into a trap! Lose 20 health.");
-                myPlayer.TakeDamage(20);
-            }
-
-            if (myPlayer.Health <= 0)
-            {
-                Console.WriteLine("\nYou have been defeated! Game over.");
-                Environment.Exit(0); // Exit the game if health is 0 or less
-            }
-
-            myPlayer.DisplayPlayerInfo();
-        }
-        
-        static void fightMonster(Player myPlayer)
-        {
-            Console.WriteLine("\nYou are fighting a monster!");
-            if (rollDice() > 3)
-            {
-                Console.WriteLine("\nYou defeated the monster!");
-            }
-            else
-            {
-                Console.WriteLine("\nThe monster landed a hit! Lose 20 health.\n");
-                myPlayer.TakeDamage(20);
+                Console.WriteLine("\nYou found a healing potion!");
+                myPlayer.Health += 20; // Heal the player by 20 points
+                if (myPlayer.Health > 100) myPlayer.Health = 100; // Cap health at 100
             }
         }
     }

@@ -4,10 +4,12 @@ namespace FirstQuest
     {
         public string Name;
         public int Health;
+        public int Gold;
         public void DisplayPlayerInfo()
         {
             Console.WriteLine($"\nPlayer Name: {Name}");
             Console.WriteLine($"Player Health: {Health}");
+            Console.WriteLine($"Player Gold: {Gold}");
         }
 
         public void TakeDamage(int damage)
