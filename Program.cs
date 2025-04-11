@@ -60,6 +60,35 @@ namespace FirstQuest
             if (encounterRoll <= 2)
             {
                 Console.WriteLine("\nYou encountered a monster!");
+                string monsterName;
+                int monsterHealth;
+                int monsterDamage;
+
+                int monsterRoll = rollDice(); // Roll for monster type
+                if (monsterRoll <= 3)
+                {
+                    monsterName = "Goblin";
+                    monsterHealth = 30; // Goblin health
+                    monsterDamage = 5; // Goblin damage
+                    Console.WriteLine("It's a Goblin!");
+                }
+                else if (monsterRoll <= 5)
+                {
+                    monsterName = "Troll";
+                    monsterHealth = 50; // Troll health
+                    monsterDamage = 8; // Troll damage
+                    Console.WriteLine("It's a Troll!");
+                }
+                else
+                {
+                    monsterName = "Dragon";
+                    monsterHealth = 100; // Dragon health
+                    monsterDamage = 15; // Dragon damage
+                    // Dragon is a special case with higher health and damage
+                    Console.WriteLine("It's a Dragon!");
+                }
+                Monster monster = new Monster(monsterName, 50, 10); // Create a new monster
+                monster.DisplayMonsterInfo(); // Display monster info
             }
 
             else if (encounterRoll <= 4)
