@@ -69,11 +69,11 @@ namespace FirstQuest
             // Roll the dice to determine the encounter
             int encounterRoll = rollDice();
 
-            if (encounterRoll <= 3)
+            if (encounterRoll <= 2)
             {
                 bool inCombat = true; // Set combat flag to true
                 Console.WriteLine("\nYou encountered a monster!");
-                Monster monster = new Monster("Goblin", 50, 10); // Create a new monster
+                Monster monster = new Monster("Goblin", 50, 5); // Create a new monster
 
                 attackMonster(monster, myPlayer, inCombat, gameRunning); // Attack the monster
             }
@@ -88,12 +88,22 @@ namespace FirstQuest
             else
             {
                 Console.WriteLine("\nYou found a healing potion!");
-                myPlayer.Health += 20; // Heal the player by 20 points
-                if (myPlayer.Health > 100) myPlayer.Health = 100; // Cap health at 100
+                int healAmount = rnd.Next(19, 101); // Amount to heal
+
+                myPlayer.Health += healAmount; // Heal the player by 20 points
+                if (myPlayer.Health > 100)
+                {
+                    myPlayer.Health = 100; // Cap health at 100
+                    healAmount = 0;
+                }
+                Console.WriteLine($"You healed for {healAmount} health points!");
+
             }
 
             // Display player info after the encounter
             myPlayer.DisplayPlayerInfo();   
+                            // add divider line for better readability
+                Console.WriteLine(new string('-', 40));
         }
 
         static void attackMonster(Monster monster, Player myPlayer, bool inCombat, bool gameRunning)
@@ -101,7 +111,7 @@ namespace FirstQuest
             while (inCombat == true)
             {
                 int attackRoll = rollDice(); // Roll the dice to determine the attack outcome
-                if (attackRoll <= 3)
+                if (attackRoll <= 2)
                 {
                     Console.WriteLine("\nYou missed your attack!");
                 }
@@ -118,30 +128,26 @@ namespace FirstQuest
 
                 if (monster.Health <= 0)
                 {
+                    monster.Health = 0; // Cap monster health at 0
                     Console.WriteLine($"\nYou defeated the {monster.Name}!");
                     myPlayer.Gold += 20; // Reward player with gold for defeating the monster
+                    Console.WriteLine($"You received 20 gold!");
+                    inCombat = false; // End combat if monster is defeated
                 }
                 else
                 {
                     monster.Attack(myPlayer); // Monster attacks back
                 }
+
+
+
                 // Display player and monster info after the attack 
                 myPlayer.DisplayPlayerInfo();
                 monster.DisplayMonsterInfo();
 
-                if (myPlayer.Health <= 0)
-                {
-                    Console.WriteLine("\nYou have been defeated! Game Over.");
-                    inCombat = false; // End combat if player is defeated
-                    gameRunning = false; // End the game
-                }
-                else if (monster.Health <= 0)
-                {
-                    Console.WriteLine($"\nYou have defeated the {monster.Name}! You can continue exploring.");
-                    inCombat = false; // End combat if monster is defeated
-                }
-                else
-                {
+                // add divider line for better readability
+                Console.WriteLine(new string('-', 40));
+                
                     Console.WriteLine("\nPress Space to continue fighting or 'Q' to flee.");
                     var key = Console.ReadKey(true); // 'true' hides the keypress from the console output
 
@@ -150,13 +156,11 @@ namespace FirstQuest
                         Console.WriteLine("\nYou chose to flee from the battle!");
                         inCombat = false; // End combat if player flees
                     }
-                    else if (key.Key == ConsoleKey.Spacebar)
+                    else if (key.Key == ConsoleKey.Spacebar && inCombat == true)
                     {
                         Console.WriteLine("\nYou chose to continue fighting!");
                         // Continue the loop for the next round of combat
                     }
-                }
-
             }
         }
     }
