@@ -1,7 +1,12 @@
+using System;
+using FirstQuest;
+
 namespace FirstQuest
 {
     public class Monster
     {
+        static Random rnd = new Random();
+
         public string Name { get; set; }
         public int Health { get; set; }
         public int Damage { get; set; }
