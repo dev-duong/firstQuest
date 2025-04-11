@@ -73,7 +73,7 @@ namespace FirstQuest
             {
                 bool inCombat = true; // Set combat flag to true
                 Console.WriteLine("\nYou encountered a monster!");
-                Monster monster = new Monster("Goblin", 50, rnd.Next(5, 16)); // Create a new monster
+                Monster monster = new Monster("Goblin", 50, 10); // Create a new monster
 
                 attackMonster(monster, myPlayer, inCombat, gameRunning); // Attack the monster
             }
