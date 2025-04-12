@@ -57,7 +57,7 @@ namespace FirstQuest
 
         static void welcome()
         {
-            Console.WriteLine("Welcome to First Quest!");
+            Console.WriteLine("\nWelcome to First Quest!");
             Console.WriteLine("Roll the dice and try your chances!");
             Console.WriteLine("The goal is to reach 500 gold! Goodluck.\n");
         }
@@ -124,18 +124,21 @@ namespace FirstQuest
 
             if (monsterRoll <= 3)
             {
+                Console.WriteLine("\nIt's a Goblin!");
                 monsterName = "Goblin";
                 monsterHealth = 30;
                 monsterDamage = rnd.Next(4, 16);
             }
             else if (monsterRoll <= 5)
             {
+                Console.WriteLine("\nIt's a Troll!");
                 monsterName = "Troll";
                 monsterHealth = 50;
                 monsterDamage = rnd.Next(9, 21);
             }
             else
             {
+                Console.WriteLine("\nIt's a Dragon!");
                 monsterName = "Dragon";
                 monsterHealth = 100;
                 monsterDamage = rnd.Next(14, 26);
@@ -170,26 +173,44 @@ namespace FirstQuest
                 {
                     monster.Health = 0; // Cap monster health at 0
                     Console.WriteLine($"\nYou defeated the {monster.Name}!");
-                    myPlayer.Gold += 20; // Reward player with gold for defeating the monster
-                    Console.WriteLine($"You received 20 gold!");
+
+                    if (monster.Name == "Goblin")
+                    {
+                        myPlayer.Gold += 10;
+                        Console.WriteLine($"You received 10 gold!");
+                    }
+                    else if (monster.Name == "Troll")
+                    {
+                        myPlayer.Gold += 20;
+                        Console.WriteLine($"You received 20 gold!");
+                    }
+                    else
+                    {
+                        myPlayer.Gold += 50;
+                        Console.WriteLine($"You received 50 gold!");
+                    }
+
                     inCombat = false; // End combat if monster is defeated
+                }
+                else if (myPlayer.Health <= 0)
+                {
+                    inCombat = false;
                 }
                 else
                 {
                     monster.Attack(myPlayer); // Monster attacks back
                 }
 
-
-
                 // Display player and monster info after the attack 
                 myPlayer.DisplayPlayerInfo();
                 monster.DisplayMonsterInfo();
 
                 // add divider line for better readability
-                Console.WriteLine(new string('-', 40));
+                Console.WriteLine("\n" + new string('-', 40));
 
                 Console.WriteLine("\nPress Space to continue fighting or 'Q' to flee.");
                 var key = Console.ReadKey(true); // 'true' hides the keypress from the console output
+                Console.WriteLine("\n" + new string('-', 40));
 
                 if (key.Key == ConsoleKey.Q)
                 {
