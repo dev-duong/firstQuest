@@ -11,6 +11,8 @@ namespace FirstQuest
         {
             Player myPlayer = new Player();
 
+            welcome();
+
             Console.WriteLine("Enter your player name:");
             string playerName = Console.ReadLine();
 
@@ -51,6 +53,13 @@ namespace FirstQuest
                     gameRunning = false; // End the game if player wins
                 }
             }
+        }
+
+        static void welcome()
+        {
+            Console.WriteLine("Welcome to First Quest!");
+            Console.WriteLine("Roll the dice and try your chances!");
+            Console.WriteLine("The goal is to reach 500 gold! Goodluck.\n");
         }
 
         // Roll dice to determine the outcome of an action
