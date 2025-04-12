@@ -82,9 +82,8 @@ namespace FirstQuest
             {
                 bool inCombat = true; // Set combat flag to true
                 Console.WriteLine("\nYou encountered a monster!");
-                Monster monster = new Monster("Goblin", 50, 5); // Create a new monster
 
-                attackMonster(monster, myPlayer, inCombat, gameRunning); // Attack the monster
+                attackMonster(monsterType(), myPlayer, inCombat, gameRunning); // Attack the monster
             }
 
             else if (encounterRoll <= 5)
@@ -113,6 +112,38 @@ namespace FirstQuest
             myPlayer.DisplayPlayerInfo();   
                             // add divider line for better readability
                 Console.WriteLine(new string('-', 40));
+        }
+
+        static Monster monsterType()
+        {
+            int monsterRoll = rollDice();
+
+            string monsterName;
+            int monsterHealth;
+            int monsterDamage;
+
+            if (monsterRoll <= 3)
+            {
+                monsterName = "Goblin";
+                monsterHealth = 30;
+                monsterDamage = rnd.Next(4, 16);
+            }
+            else if (monsterRoll <= 5)
+            {
+                monsterName = "Troll";
+                monsterHealth = 50;
+                monsterDamage = rnd.Next(9, 21);
+            }
+            else
+            {
+                monsterName = "Dragon";
+                monsterHealth = 100;
+                monsterDamage = rnd.Next(14, 26);
+            }
+
+            Monster monster = new Monster(monsterName, monsterHealth, monsterDamage);
+
+            return monster;
         }
 
         static void attackMonster(Monster monster, Player myPlayer, bool inCombat, bool gameRunning)
@@ -156,20 +187,20 @@ namespace FirstQuest
 
                 // add divider line for better readability
                 Console.WriteLine(new string('-', 40));
-                
-                    Console.WriteLine("\nPress Space to continue fighting or 'Q' to flee.");
-                    var key = Console.ReadKey(true); // 'true' hides the keypress from the console output
 
-                    if (key.Key == ConsoleKey.Q)
-                    {
-                        Console.WriteLine("\nYou chose to flee from the battle!");
-                        inCombat = false; // End combat if player flees
-                    }
-                    else if (key.Key == ConsoleKey.Spacebar && inCombat == true)
-                    {
-                        Console.WriteLine("\nYou chose to continue fighting!");
-                        // Continue the loop for the next round of combat
-                    }
+                Console.WriteLine("\nPress Space to continue fighting or 'Q' to flee.");
+                var key = Console.ReadKey(true); // 'true' hides the keypress from the console output
+
+                if (key.Key == ConsoleKey.Q)
+                {
+                    Console.WriteLine("\nYou chose to flee from the battle!");
+                    inCombat = false; // End combat if player flees
+                }
+                else if (key.Key == ConsoleKey.Spacebar && inCombat == true)
+                {
+                    Console.WriteLine("\nYou chose to continue fighting!");
+                    // Continue the loop for the next round of combat
+                }
             }
         }
     }
