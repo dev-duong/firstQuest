@@ -12,11 +12,8 @@ namespace FirstQuest
             Player myPlayer = new Player();
 
             welcome();
+            userName(myPlayer);
 
-            Console.WriteLine("Enter your player name:");
-            string playerName = Console.ReadLine();
-
-            myPlayer.Name = playerName;
             myPlayer.Health = 100;
             myPlayer.Gold = 0; // Initialize gold to 0
 
@@ -60,6 +57,13 @@ namespace FirstQuest
             Console.WriteLine("\nWelcome to First Quest!");
             Console.WriteLine("Roll the dice and try your chances!");
             Console.WriteLine("The goal is to reach 500 gold! Goodluck.\n");
+        }
+
+        static void userName(Player myPlayer)
+        {
+            Console.WriteLine("Enter your player name:");
+            string? playerName = Console.ReadLine();
+            myPlayer.Name = playerName;
         }
 
         // Roll dice to determine the outcome of an action

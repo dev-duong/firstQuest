@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FirstQuest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0dbcef9482312ca0dcca7ee2a5b28f7c4e5b03fd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b8155d92706451b1e3710c303c0b723cec02e47e")]
 [assembly: System.Reflection.AssemblyProductAttribute("FirstQuest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FirstQuest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
