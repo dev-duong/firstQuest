@@ -26,9 +26,9 @@ namespace FirstQuest
 
         public void DisplayMonsterInfo()
         {
-            Console.WriteLine($"\nMonster Name: {Name}");
+            Console.WriteLine($"Monster Name: {Name}");
             Console.WriteLine($"Monster Health: {Health}");
-            Console.WriteLine($"Monster Damage: {Damage}");
+            Console.WriteLine($"Monster Damage: {Damage}\n");
         }
     }
 }

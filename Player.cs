@@ -9,7 +9,7 @@ namespace FirstQuest
         {
             Console.WriteLine($"\nPlayer Name: {Name}");
             Console.WriteLine($"Player Health: {Health}");
-            Console.WriteLine($"Player Gold: {Gold}");
+            Console.WriteLine($"Player Gold: {Gold}\n");
         }
 
         public void TakeDamage(int damage)
