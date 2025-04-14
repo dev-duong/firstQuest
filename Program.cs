@@ -84,10 +84,9 @@ namespace FirstQuest
 
             if (encounterRoll <= 2)
             {
-                bool inCombat = true; // Set combat flag to true
                 Console.WriteLine("\nYou encountered a monster!");
 
-                attackMonster(monsterType(), myPlayer, inCombat, gameRunning); // Attack the monster
+                attackMonster(monsterType(), myPlayer); // Attack the monster
             }
 
             else if (encounterRoll <= 5)
@@ -103,7 +102,7 @@ namespace FirstQuest
                 int healAmount = rnd.Next(19, 101); // Amount to heal
 
                 myPlayer.Health += healAmount; // Heal the player by 20 points
-                if (myPlayer.Health > 100)
+                if (myPlayer.Health >= 100)
                 {
                     myPlayer.Health = 100; // Cap health at 100
                     healAmount = 0;
@@ -153,8 +152,10 @@ namespace FirstQuest
             return monster;
         }
 
-        static void attackMonster(Monster monster, Player myPlayer, bool inCombat, bool gameRunning)
+        static void attackMonster(Monster monster, Player myPlayer)
         {
+            bool inCombat = true; // Set combat flag to true
+
             while (inCombat == true)
             {
                 int attackRoll = rollDice(); // Roll the dice to determine the attack outcome
@@ -196,13 +197,10 @@ namespace FirstQuest
 
                     inCombat = false; // End combat if monster is defeated
                 }
-                else if (myPlayer.Health <= 0)
-                {
-                    inCombat = false;
-                }
                 else
                 {
                     monster.Attack(myPlayer); // Monster attacks back
+                    if (myPlayer.Health <= 0) inCombat = false;
                 }
 
                 // Display player and monster info after the attack 
