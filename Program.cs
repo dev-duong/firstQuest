@@ -133,26 +133,44 @@ namespace FirstQuest
                 Console.WriteLine("It's a Goblin!");
                 monsterName = "Goblin";
                 monsterHealth = 30;
-                monsterDamage = rnd.Next(4, 16);
+                monsterDamage = monsterAttack(monsterName, 0);
             }
             else if (monsterRoll <= 5)
             {
                 Console.WriteLine("It's a Troll!");
                 monsterName = "Troll";
                 monsterHealth = 50;
-                monsterDamage = rnd.Next(9, 21);
+                monsterDamage = monsterAttack(monsterName, 0);
             }
             else
             {
                 Console.WriteLine("It's a Dragon!");
                 monsterName = "Dragon";
                 monsterHealth = 100;
-                monsterDamage = rnd.Next(14, 26);
+                monsterDamage = monsterAttack(monsterName, 0);
             }
 
             Monster monster = new Monster(monsterName, monsterHealth, monsterDamage);
 
             return monster;
+        }
+
+        static int monsterAttack(string monsterName, int monsterDamage)
+        {
+            int damageRolll = rnd.Next(1, 7); // Generates a random number between 1 and 6
+            // Console.WriteLine(damageRolll); // Debug
+
+            if (damageRolll <= 2) monsterDamage = 0;
+            else if (monsterName == "Goblin" && damageRolll <= 5) monsterDamage = rnd.Next(4, 11); // 5 - 10 dmg
+            else if (monsterName == "Goblin" && damageRolll <= 6) monsterDamage = rnd.Next(9, 16); // 10 - 15 dmg (crit)
+
+            else if (monsterName == "Troll" && damageRolll <= 5) monsterDamage = rnd.Next(14, 21); // 15 - 20 dmg
+            else if (monsterName == "Troll" && damageRolll <= 6) monsterDamage = rnd.Next(19, 26); // 20 - 25 dmg (crit)
+
+            else if (monsterName == "Dragon" && damageRolll <= 5) monsterDamage = rnd.Next(19, 26); // 20 - 25 dmg
+            else if (monsterName == "Dragon" && damageRolll <= 6) monsterDamage = rnd.Next(24 - 31); // 25 - 30 dmg (crit)
+
+            return monsterDamage;
         }
 
         static void attackMonster(Monster monster, Player myPlayer)
@@ -162,10 +180,8 @@ namespace FirstQuest
             while (inCombat == true)
             {
                 int attackRoll = rollDice(); // Roll the dice to determine the attack outcome
-                if (attackRoll <= 2)
-                {
-                    Console.WriteLine("You missed your attack!");
-                }
+                
+                if (attackRoll <= 2) Console.WriteLine("You missed your attack!");
                 else if (attackRoll <= 5)
                 {
                     Console.WriteLine("You hit the monster for 10 damage!");
@@ -173,7 +189,7 @@ namespace FirstQuest
                 }
                 else
                 {
-                    Console.WriteLine("Critical hit! You hit the monster for 20 damage!");
+                    Console.WriteLine("CRITICAL HIT! You hit the monster for 20 damage!");
                     monster.Health -= 20; // Player attacks monster for 20 damage
                 }
 
@@ -219,12 +235,12 @@ namespace FirstQuest
 
                 if (key.Key == ConsoleKey.Q)
                 {
-                    Console.WriteLine("You chose to flee from the battle!");
+                    Console.WriteLine("\nYou chose to flee from the battle!");
                     inCombat = false; // End combat if player flees
                 }
                 else if (key.Key == ConsoleKey.Spacebar && inCombat == true)
                 {
-                    Console.WriteLine("You chose to continue fighting!");
+                    Console.WriteLine("\nYou chose to continue fighting!");
                     // Continue the loop for the next round of combat
                 }
             }
