@@ -19,39 +19,8 @@ namespace FirstQuest
 
             myPlayer.DisplayPlayerInfo();
 
-            // Add a loop so the game keeps going
-            bool gameRunning = true;
-
-            while (gameRunning)
-            {
-                Console.WriteLine(new string('-', 40));
-
-                Console.WriteLine("\nPress Space to continue or 'Q' to quit.");
-
-                // Wait for the player to press space or 'Q'
-                var key = Console.ReadKey(true); // 'true' hides the keypress from the console output
-
-                if (key.Key == ConsoleKey.Spacebar)
-                {
-                    encounter(myPlayer, gameRunning);  // Continue the encounter if space is pressed
-                }
-                else if (key.Key == ConsoleKey.Q)
-                {
-                    gameRunning = false;  // Quit the game if 'Q' is pressed
-                    Console.WriteLine("You chose to quit. Goodbye!");
-                }
-                
-                if (myPlayer.Health <= 0)
-                {
-                    Console.WriteLine("You have been defeated! Game Over.");
-                    gameRunning = false; // End the game if player is defeated
-                }
-                else if (myPlayer.Gold >= 500) // Check if player has enough gold to win
-                {
-                    Console.WriteLine("Congratulations! You have collected enough gold to win the game!");
-                    gameRunning = false; // End the game if player wins
-                }
-            }
+            continueGamme(myPlayer);
+            
         }
 
         static void welcome()
@@ -79,7 +48,7 @@ namespace FirstQuest
             return diceRoll;
         }
 
-        static void encounter(Player myPlayer, bool gameRunning)
+        static void encounter(Player myPlayer)
         {
             Console.WriteLine("\n" + new string('-', 40));
             Console.WriteLine("\nYou are exploring the forest...");
@@ -91,7 +60,8 @@ namespace FirstQuest
             {
                 Console.WriteLine("You encountered a monster!");
 
-                attackMonster(monsterType(), myPlayer); // Attack the monster
+                Monster monster = Monster.monsterType();
+                myPlayer.attackMonster(monster, myPlayer);
             }
 
             else if (encounterRoll <= 5)
@@ -120,130 +90,42 @@ namespace FirstQuest
             myPlayer.DisplayPlayerInfo();
         }
 
-        static Monster monsterType()
+        static void continueGamme(Player myPlayer)
         {
-            int monsterRoll = rollDice();
+            // Add a loop so the game keeps going
+            bool gameRunning = true;
 
-            string monsterName;
-            int monsterHealth;
-            int monsterDamage;
-
-            if (monsterRoll <= 3)
+            while (gameRunning)
             {
-                Console.WriteLine("It's a Goblin!");
-                monsterName = "Goblin";
-                monsterHealth = 30;
-                monsterDamage = monsterAttack(monsterName, 0);
-            }
-            else if (monsterRoll <= 5)
-            {
-                Console.WriteLine("It's a Troll!");
-                monsterName = "Troll";
-                monsterHealth = 50;
-                monsterDamage = monsterAttack(monsterName, 0);
-            }
-            else
-            {
-                Console.WriteLine("It's a Dragon!");
-                monsterName = "Dragon";
-                monsterHealth = 100;
-                monsterDamage = monsterAttack(monsterName, 0);
-            }
+                Console.WriteLine(new string('-', 40));
 
-            Monster monster = new Monster(monsterName, monsterHealth, monsterDamage);
+                Console.WriteLine("\nPress Space to continue or 'Q' to quit.");
 
-            return monster;
-        }
-
-        static int monsterAttack(string monsterName, int monsterDamage)
-        {
-            int damageRolll = rnd.Next(1, 7); // Generates a random number between 1 and 6
-            // Console.WriteLine(damageRolll); // Debug
-
-            if (damageRolll <= 2) monsterDamage = 0;
-            else if (monsterName == "Goblin" && damageRolll <= 5) monsterDamage = rnd.Next(4, 11); // 5 - 10 dmg
-            else if (monsterName == "Goblin" && damageRolll <= 6) monsterDamage = rnd.Next(9, 16); // 10 - 15 dmg (crit)
-
-            else if (monsterName == "Troll" && damageRolll <= 5) monsterDamage = rnd.Next(14, 21); // 15 - 20 dmg
-            else if (monsterName == "Troll" && damageRolll <= 6) monsterDamage = rnd.Next(19, 26); // 20 - 25 dmg (crit)
-
-            else if (monsterName == "Dragon" && damageRolll <= 5) monsterDamage = rnd.Next(19, 26); // 20 - 25 dmg
-            else if (monsterName == "Dragon" && damageRolll <= 6) monsterDamage = rnd.Next(24 - 31); // 25 - 30 dmg (crit)
-
-            return monsterDamage;
-        }
-
-        static void attackMonster(Monster monster, Player myPlayer)
-        {
-            bool inCombat = true; // Set combat flag to true
-
-            while (inCombat == true)
-            {
-                int attackRoll = rollDice(); // Roll the dice to determine the attack outcome
-                
-                if (attackRoll <= 2) Console.WriteLine("You missed your attack!");
-                else if (attackRoll <= 5)
-                {
-                    Console.WriteLine("You hit the monster for 10 damage!");
-                    monster.Health -= 10; // Player attacks monster for 10 damage
-                }
-                else
-                {
-                    Console.WriteLine("CRITICAL HIT! You hit the monster for 20 damage!");
-                    monster.Health -= 20; // Player attacks monster for 20 damage
-                }
-
-                if (monster.Health <= 0)
-                {
-                    monster.Health = 0; // Cap monster health at 0
-                    Console.WriteLine($"You defeated the {monster.Name}!");
-
-                    if (monster.Name == "Goblin")
-                    {
-                        myPlayer.Gold += 10;
-                        Console.WriteLine($"You received 10 gold!");
-                    }
-                    else if (monster.Name == "Troll")
-                    {
-                        myPlayer.Gold += 20;
-                        Console.WriteLine($"You received 20 gold!");
-                    }
-                    else
-                    {
-                        myPlayer.Gold += 50;
-                        Console.WriteLine($"You received 50 gold!");
-                    }
-
-                    inCombat = false; // End combat if monster is defeated
-                }
-                else
-                {
-                    monster.Attack(myPlayer); // Monster attacks back
-                    if (myPlayer.Health <= 0) inCombat = false;
-                }
-
-                // Display player and monster info after the attack 
-                myPlayer.DisplayPlayerInfo();
-                monster.DisplayMonsterInfo();
-
-                // add divider line for better readability
-                Console.WriteLine(new string('-', 40) + "\n");
-
-                Console.WriteLine("Press Space to continue fighting or 'Q' to flee.");
+                // Wait for the player to press space or 'Q'
                 var key = Console.ReadKey(true); // 'true' hides the keypress from the console output
-                Console.WriteLine("\n" + new string('-', 40));
 
-                if (key.Key == ConsoleKey.Q)
+                if (key.Key == ConsoleKey.Spacebar)
                 {
-                    Console.WriteLine("\nYou chose to flee from the battle!");
-                    inCombat = false; // End combat if player flees
+                    encounter(myPlayer);  // Continue the encounter if space is pressed
                 }
-                else if (key.Key == ConsoleKey.Spacebar && inCombat == true)
+                else if (key.Key == ConsoleKey.Q)
                 {
-                    Console.WriteLine("\nYou chose to continue fighting!");
-                    // Continue the loop for the next round of combat
+                    gameRunning = false;  // Quit the game if 'Q' is pressed
+                    Console.WriteLine("You chose to quit. Goodbye!");
+                }
+
+                if (myPlayer.Health <= 0)
+                {
+                    Console.WriteLine("You have been defeated! Game Over.");
+                    gameRunning = false; // End the game if player is defeated
+                }
+                else if (myPlayer.Gold >= 500) // Check if player has enough gold to win
+                {
+                    Console.WriteLine("Congratulations! You have collected enough gold to win the game!");
+                    gameRunning = false; // End the game if player wins
                 }
             }
         }
+
     }
 }
