@@ -10,6 +10,7 @@ namespace FirstQuest
 
         public string Name;
         public int Health;
+        public int MaxHealth;
         public int Damage;
 
         public static Monster monsterType()
@@ -41,7 +42,8 @@ namespace FirstQuest
             return new Monster
             {
                 Name = monsterName,
-                Health = monsterHealth
+                Health = monsterHealth,
+                MaxHealth = monsterHealth
             };
         }
 
@@ -79,7 +81,7 @@ namespace FirstQuest
         public void DisplayMonsterInfo()
         {
             Console.WriteLine($"Monster Name: {Name}");
-            Console.WriteLine($"Monster Health: {Health}\n");
+            Console.WriteLine($"Monster Health: {Health}/{MaxHealth}\n");
         }
     }
 }

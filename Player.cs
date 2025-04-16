@@ -15,7 +15,7 @@ namespace FirstQuest
         public void DisplayPlayerInfo()
         {
             Console.WriteLine($"\nPlayer Name: {Name}");
-            Console.WriteLine($"Player Health: {Health}");
+            Console.WriteLine($"Player Health: {Health}/100");
             Console.WriteLine($"Player Gold: {Gold}\n");
         }
 
