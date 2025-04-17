@@ -15,11 +15,10 @@ namespace FirstQuest
             GameManager.userName(myPlayer);
 
             myPlayer.Health = 100;
-            myPlayer.Gold = 0; // Initialize gold to 0
+            myPlayer.Gold = 0;
 
             myPlayer.DisplayPlayerInfo();
             GameManager.continueGamme(myPlayer);
-
         }
     }
 }

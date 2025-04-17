@@ -19,14 +19,6 @@ namespace FirstQuest
             Console.WriteLine($"Player Gold: {Gold}\n");
         }
 
-        static int rollDice()
-        {
-            int diceRoll = rnd.Next(0, 7); // Generates a random number between 1 and 6
-            Console.WriteLine($"\nYou rolled a {diceRoll}!");
-
-            return diceRoll;
-        }
-
         public void TakeDamage(int damage)
         {
             Health -= damage;
@@ -43,7 +35,7 @@ namespace FirstQuest
 
             while (inCombat == true)
             {
-                int attackRoll = rollDice(); // Roll the dice to determine the attack outcome
+                int attackRoll = GameManager.rollDice(); // Roll the dice to determine the attack outcome
 
                 if (attackRoll <= 2) Console.WriteLine("You missed your attack!");
                 else if (attackRoll <= 5)
